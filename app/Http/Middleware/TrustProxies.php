@@ -10,9 +10,11 @@ class TrustProxies extends Middleware
     /**
      * The trusted proxies for this application.
      *
+     * FIX THIS WITH CORRECT IP
+     *
      * @var array
      */
-    protected $proxies;
+    protected $proxies = '**';
 
     /**
      * The current proxy header mappings.
