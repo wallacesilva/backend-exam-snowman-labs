@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Socialite;
+use App\User;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -56,8 +58,28 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user_social = Socialite::driver('facebook')->user();
 
-        // $user->token;
+        // $user_social->token;
+        try {
+            
+            $user = User::where('email', $user_social->getEmail())->firstOrFail();
+
+            Auth::login($user);
+
+        } catch (ModelNotFoundException $e) {
+
+            $user = User::create([
+                'name' => $user_social->getName(),
+                'email' => $user_social->getEmail(),
+                'password' => bcrypt($user_social->getName().md5(uniqid())), // FIXME
+            ]);
+
+            Auth::login($user);
+
+        } catch (Exception $e) {
+            
+        }
+        
     }
 }
