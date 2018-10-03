@@ -10,7 +10,7 @@ class TrustProxies extends Middleware
     /**
      * The trusted proxies for this application.
      *
-     * FIX THIS WITH CORRECT IP
+     * FIXME WITH CORRECT IP
      *
      * @var array
      */
