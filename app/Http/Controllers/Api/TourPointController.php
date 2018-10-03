@@ -389,38 +389,46 @@ class TourPointController extends Controller
     {
         //
         $data['error'] = false;
+        $tour_point = null;
+
+        try {
+
+            $tour_point = TourPoint::findOrFail($id);
+
+        } catch (ModelNotFoundException $e) {
+            
+            $data['error'] = true;
+
+            $data['message'] = $e->getMessage();
+
+            return response()->json($data, 404);
+
+        } catch (Exception $e) {
+
+            $data['error'] = true;
+            $data['message'] = $e->getMessage();
+
+            return response()->json($data, 400);
+
+        }
 
         // check if is user, only user can change tour point
-        if (!auth()->check() || auth()->user()->id != $point->user_id) {
+        if (!auth()->check() || auth()->user()->id != $tour_point->user_id) {
+
             $data['error'] = true;
 
             $data['message'] = 'Unauthorized';
 
             return response()->json($data, 401); //
         }
-
-        try {
-            $point = TourPoint::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            $data['error'] = true;
-
-            $data['message'] = $e->getMessage();
-
-            return response()->json($data, 404);
-        } catch (Exception $e) {
-            $data['error'] = true;
-            $data['message'] = $e->getMessage();
-
-            return response()->json($data, 400);
-        }
         
-        $data['point'] = $point;
+        $data['point'] = $tour_point;
 
         // persist on database, remove/destroy, without softdeletes
-        $point->delete();
+        $tour_point->delete();
 
         // clear cache if was public point
-        if ($point->visibility == 'public') {
+        if ($tour_point->visibility == 'public') {
 
             // clear cache
             Cache::forget($this->cached_points_name);
