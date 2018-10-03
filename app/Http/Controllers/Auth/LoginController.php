@@ -65,7 +65,7 @@ class LoginController extends Controller
             
             $user = User::where('email', $user_social->getEmail())->firstOrFail();
 
-            Auth::login($user);
+            Auth::login($user, true);
 
         } catch (ModelNotFoundException $e) {
 
@@ -75,7 +75,7 @@ class LoginController extends Controller
                 'password' => bcrypt($user_social->getName().md5(uniqid())), // FIXME
             ]);
 
-            Auth::login($user);
+            Auth::login($user, true);
 
         } catch (Exception $e) {
             
