@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Socialite;
@@ -54,6 +55,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from Facebook.
      *
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function handleProviderCallback(Request $request)
