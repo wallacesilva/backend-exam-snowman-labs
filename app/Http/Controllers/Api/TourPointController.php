@@ -121,7 +121,7 @@ class TourPointController extends Controller
     public function listByUser(Request $request)
     {
         $data['error'] = true;
-        $data['message'] = Socialite::driver('facebook')->user();
+        $data['message'] = Socialite::driver('facebook')->stateless()->user();
 
         return response()->json($data, 500); //
 
