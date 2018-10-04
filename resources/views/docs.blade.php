@@ -10,20 +10,13 @@
     <title>BackEnd Exam - Docs</title>
 </head>
 <body>
-    <div class="container">
-        <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Link with href
-          </a>
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Button with data-target
-          </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div>
+    <div class="container text-center mt-5">
+
+        <h1>Welcome to my Backend Exam!</h1>
+
+        <a class="btn btn-primary" href="{{ url('/docs') }}">Documentation</a>
+        <a class="btn btn-primary" href="{{ url('/api/tourpoints') }}">API</a>
+        
     </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
