@@ -72,7 +72,7 @@ class LoginController extends Controller
             $user = User::create([
                 'name' => $user_social->getName(),
                 'email' => $user_social->getEmail(),
-                'password' => bcrypt($user_social->getName().md5(uniqid())), // FIXME
+                'password' => bcrypt($user_social->token), // FIXME
             ]);
 
             Auth::login($user, true);
