@@ -309,8 +309,8 @@ class TourPointController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // check if is user, only user can change tour point
-        if (!auth()->check() || auth()->user()->id != $point->user_id) {
+        // check if user logged to update tour point
+        if (!auth()->check()) {
 
             $data['error'] = true;
 
@@ -358,6 +358,16 @@ class TourPointController extends Controller
             $data['message'] = $e->getMessage();
 
             return response()->json($data, 400);
+        }
+
+        // check visibility of point
+        if ($point->visibility == 'private' || (!auth()->check() || auth()->user()->id != $point->user_id)) {
+
+            $data['error'] = true;
+
+            $data['message'] = 'Unauthorized';
+
+            return response()->json($data, 401); //
         }
         
         // clear inputs and add to model
