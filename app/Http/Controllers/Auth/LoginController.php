@@ -65,10 +65,6 @@ class LoginController extends Controller
             
             $user = User::where('email', $user_social->getEmail())->firstOrFail();
 
-            // save state 
-            $state = $request->get('state');
-            $request->session()->put('state',$state);
-
             Auth::login($user, true);
 
         } catch (ModelNotFoundException $e) {
@@ -79,20 +75,12 @@ class LoginController extends Controller
                 'password' => bcrypt($user_social->token), // FIXME
             ]);
 
-            // save state 
-            $state = $request->get('state');
-            $request->session()->put('state',$state);
-
             Auth::login($user, true);
 
         } catch (Exception $e) {
 
             return redirect('/login/facebook');
             
-        }
-
-        if (auth()->check() == false) {
-            session()->regenerate();
         }
 
         return redirect($this->redirectTo);
