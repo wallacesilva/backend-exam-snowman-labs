@@ -65,6 +65,9 @@ class LoginController extends Controller
             
             $user = User::where('email', $user_social->getEmail())->firstOrFail();
 
+            // save state 
+            session()->put('state', request()->input('state'));
+
             Auth::login($user, true);
 
         } catch (ModelNotFoundException $e) {
@@ -74,6 +77,9 @@ class LoginController extends Controller
                 'email' => $user_social->getEmail(),
                 'password' => bcrypt($user_social->token), // FIXME
             ]);
+
+            // save state 
+            session()->put('state', request()->input('state'));
 
             Auth::login($user, true);
 
