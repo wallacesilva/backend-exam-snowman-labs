@@ -78,8 +78,12 @@ class LoginController extends Controller
             Auth::login($user, true);
 
         } catch (Exception $e) {
+
+            return redirect('/login/facebook');
             
         }
+
+        return redirect($this->redirectTo);
         
     }
 }
