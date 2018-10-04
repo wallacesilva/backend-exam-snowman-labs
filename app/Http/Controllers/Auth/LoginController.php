@@ -79,11 +79,11 @@ class LoginController extends Controller
 
         } catch (Exception $e) {
 
-            return redirect('/login/facebook');
+            // return redirect('/login/facebook');
             
         }
 
-        return redirect($this->redirectTo);
+        // return redirect($this->redirectTo);
         
     }
 }
