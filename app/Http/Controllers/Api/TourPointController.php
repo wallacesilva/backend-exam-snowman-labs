@@ -120,11 +120,6 @@ class TourPointController extends Controller
      */
     public function listByUser(Request $request)
     {
-        $data['error'] = true;
-        $data['message'] = Socialite::driver('facebook')->user();
-
-        return response()->json($data, 500); //
-
         // check if user logged to add tour point
         if (!auth()->check()) {
 
