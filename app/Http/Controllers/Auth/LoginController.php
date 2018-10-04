@@ -56,7 +56,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         $user_social = Socialite::driver('facebook')->user();
 
@@ -66,7 +66,8 @@ class LoginController extends Controller
             $user = User::where('email', $user_social->getEmail())->firstOrFail();
 
             // save state 
-            session()->put('state', request()->input('state'));
+            $state = $request->get('state');
+            $request->session()->put('state',$state);
 
             Auth::login($user, true);
 
@@ -79,7 +80,8 @@ class LoginController extends Controller
             ]);
 
             // save state 
-            session()->put('state', request()->input('state'));
+            $state = $request->get('state');
+            $request->session()->put('state',$state);
 
             Auth::login($user, true);
 
@@ -87,6 +89,10 @@ class LoginController extends Controller
 
             return redirect('/login/facebook');
             
+        }
+
+        if (auth()->check() == false) {
+            session()->regenerate();
         }
 
         return redirect($this->redirectTo);
