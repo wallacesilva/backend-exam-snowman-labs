@@ -15,8 +15,9 @@
         <h1>Welcome to my Backend Exam!</h1>
 
         <a class="btn btn-primary" href="{{ url('/docs') }}">Documentation</a>
+        <a class="btn btn-primary" href="{{ url('/login/facebook') }}">Login with Facebook</a>
         <a class="btn btn-primary" href="{{ url('/api/tourpoints') }}">API</a>
-        
+
     </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
