@@ -341,14 +341,18 @@ class TourPointController extends Controller
         $data['error'] = false;
 
         try {
+            
             $point = TourPoint::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            $data['error'] = true;
 
+        } catch (ModelNotFoundException $e) {
+            
+            $data['error'] = true;
             $data['message'] = $e->getMessage();
 
-            return response()->json($data, 400);
+            return response()->json($data, 404);
+
         } catch (Exception $e) {
+            
             $data['error'] = true;
             $data['message'] = $e->getMessage();
 
