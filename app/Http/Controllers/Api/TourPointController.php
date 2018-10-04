@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Cache;
+use Socialite;
 use Validator;
 use App\TourPoint;
 use App\Checkin;
@@ -119,6 +120,11 @@ class TourPointController extends Controller
      */
     public function listByUser(Request $request)
     {
+        $data['error'] = true;
+        $data['message'] = Socialite::driver('facebook')->stateless()->user();
+
+        return response()->json($data, 500); //
+
         // check if user logged to add tour point
         if (!auth()->check()) {
 
