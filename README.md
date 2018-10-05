@@ -1,3 +1,26 @@
+# Install
+You can use the file *install.sh* or execute the commands/steps follow:
+
+```composer install```
+
+```composer run-script post-root-package-install```
+
+```composer run-script post-create-project-cmd```
+
+Configure database in .env
+
+If you use sqlite, remember execute in your folder:
+
+```touch database/database.sqlite```
+
+After you configure your database run migrations, in production env add the parameter ```--force``` to add yes and run anywhere:
+
+```php artisan migrate```
+
+If you have a any problem clear caches with:
+
+```php artisan cache:clear && php artisan config:clear && php artisan clear-compiled```
+
 # Specification
 
 At Snowman Labs we are developing an application that allows users to view and create __Tourist Spots__ on a map. 
